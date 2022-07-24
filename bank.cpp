@@ -28,11 +28,7 @@ template <typename F>
 void file_system(F f_first_name, F f_last_name, F f_personal_id, F f_country_of_birth, F f_account_number){
 	ofstream user_account("user_accounts.txt", ofstream::app);
 	if(user_account.is_open()){
-		user_account << f_first_name << endl;
-		user_account << f_last_name << endl;
-		user_account << f_personal_id << endl;
-		user_account << f_country_of_birth << endl;
-		user_account << f_account_number << endl;
+		user_account << f_first_name << ", " << f_last_name << ", " << f_personal_id << ", " << f_country_of_birth << ", " << f_account_number << endl;
 		user_account.close();
 	}else cout << "Problem with opening file";
 }
@@ -67,7 +63,7 @@ void account::new_acc(){
 
 	string account = gen_random(9);
 	cout << "\n\tThat is your account number, please remember it, you will need it for login: " << account << endl;
-	file_system(country_of_birth, first_name, last_name, personal_id, account);
+	file_system(first_name, last_name, country_of_birth, personal_id, account);
 	system("\n\tpause");
 	system("cls");
 }
