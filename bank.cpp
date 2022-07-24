@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cmath>
 #include <fstream>
+#include "C:\git repository\bank\bank_system\Data\file_system.h"
 
 using std::fstream;
 using std::ofstream;
@@ -24,15 +25,6 @@ public:
 	void new_acc();
 	void read_acc();
 };
-template <typename F>
-void file_system(F f_first_name, F f_last_name, F f_personal_id, F f_country_of_birth, F f_account_number){
-	ofstream user_account("user_accounts.txt", ofstream::app);
-	if(user_account.is_open()){
-		user_account << f_first_name << ", " << f_last_name << ", " << f_personal_id << ", " << f_country_of_birth << ", " << f_account_number << endl;
-		user_account.close();
-	}else cout << "Problem with opening file";
-}
-
 string gen_random(const int len){
 	ofstream user_account("user_accounts.txt", ofstream::app);
 	static const char alphanum[] = "0123456789";
