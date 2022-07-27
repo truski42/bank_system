@@ -4,7 +4,6 @@
 #include <ctime>
 #include <cmath>
 #include <fstream>
-#include "C:\git repository\bank\bank_system\Data\file_system.h"
 #include "C:\git repository\bank\bank_system\Data\personal_id.h"
 #include "Data\account.h"
 #include <vector>
@@ -64,6 +63,7 @@ void account::login_acc()
 }
 int main()
 {
+	CreatePerson();
 	srand(time(0));
 	// account A;
 	int choice;
@@ -72,7 +72,7 @@ int main()
 	std::cout << "\n\n\t\t\tCUSTOMER ACCOUNT BANKING MANAGEMENT SYSTEM" << std::endl;
 	while (true)
 	{
-		LoadPerson();
+		//LoadPerson();
 		cout << "\t1. Create new account" << endl;
 		cout << "\t2. Login to existing account" << endl;
 		cout << "\t3. Edit your account" << endl;
@@ -82,15 +82,15 @@ int main()
 		switch (choice)
 		{
 		case 1:
-			EditPerson();
+			NewAccount();
 			// A.new_acc();
 			break;
 		case 2:
-			DisplayPerson();
+			LoginPerson();
 			// A.login_acc();
 			break;
 		case 3:
-			EditPerson();
+			NewAccount();
 			break;
 		case 4:
 			// delete new_acc;

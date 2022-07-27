@@ -4,13 +4,20 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <ctime>
+// CLASS
+Person::Person()
+{
+    std::cout << "\n\tBuilding a PERSON.";
+}
+Person::~Person()
+{
+    std::cout << "\n\tDestroying a Person.";
+}
+Person *CG;
 // Globals
 
-std::string first_name;
-std::string last_name;
-std::string personal_id;
-std::string country_of_birth;
-std::string account;
+// Creating random account number
+
 std::string gen_random(const int len)
 {
     // ofstream user_account("user_accounts.txt", ofstream::app);
@@ -24,6 +31,15 @@ std::string gen_random(const int len)
     }
     return tmp_s;
 }
+//-------------------------------------------------------------------------------------------------------------------//
+void CreatePerson()
+{
+    CG = new Person();
+}
+//-------------------------------------------------------------------------------------------------------------------//
+
+// Saving values to a text file
+
 void SavePerson()
 {
     try
@@ -31,10 +47,10 @@ void SavePerson()
         std::ofstream datafile;
         datafile.open("user_accounts.txt", std::ios::out);
 
-        datafile << first_name << "\n";
-        datafile << last_name << "\n";
-        datafile << country_of_birth << "\n";
-        datafile << personal_id << "\n";
+        datafile << CG->GetFirstName() << "\n";
+        datafile << CG->GetLastName() << "\n";
+        datafile << CG->GetCountrytBirth() << "\n";
+        datafile << CG->GetPersonalId() << "\n";
         datafile << gen_random(9) << "\n";
         datafile.close();
         std::cout << "\n\tSuccess! Data was saved to file";
@@ -45,21 +61,34 @@ void SavePerson()
     }
 }
 //-------------------------------------------------------------------------------------------------------------------//
+
+// File loading
+
 void LoadPerson()
 {
     try
     {
+        std::string TEMP;
         std::ifstream datafile;
         datafile.open("user_accounts.txt", std::ios::in);
+        getline(datafile, TEMP);
+        CG->SetFirstName(TEMP);
 
-        getline(datafile, first_name);
-        getline(datafile, last_name);
-        getline(datafile, country_of_birth);
-        getline(datafile, personal_id);
-        getline(datafile, account);
+        getline(datafile, TEMP);
+        CG->SetLastName(TEMP);
+
+        getline(datafile, TEMP);
+        CG->SetCountryBirth(TEMP);
+
+        getline(datafile, TEMP);
+        CG->SetPersonalId(TEMP);
+
+        getline(datafile, TEMP);
+        CG->SetAccountNumber(TEMP);
 
         datafile.close();
-        std::cout << "\n\tSuccess! Data was loaded" << "\n";
+        DisplayAccount();
+        std::cout << "\n\tSuccess! Data was loaded\n";
         Sleep(1000);
     }
     catch (std::string exc)
@@ -68,26 +97,64 @@ void LoadPerson()
     }
 }
 //-------------------------------------------------------------------------------------------------------------------//
-void DisplayPerson()
+
+// Displaying the account number after creating a new user
+
+void DisplayAccount()
 {
     system("cls");
-    std::cout << account << "\n";
+    std::cout << "\n\tThis is your account number, remember it you will need it to log in: " <<CG->GetAccountNumber() << "\n";
+    Sleep(3000);
+    system("cls");
 }
 //-------------------------------------------------------------------------------------------------------------------//
-void EditPerson()
+
+// Creating a new user account
+void NewAccount()
 {
+    std::string TEMP;
     system("cls");
     std::cout << "\n\tEnter your first name: ";
     std::cin.ignore();
-    getline(std::cin, first_name);
+    getline(std::cin, TEMP);
+    CG->SetFirstName(TEMP);
 
     std::cout << "\n\tEnter your last name: ";
-    getline(std::cin, last_name);
+    getline(std::cin, TEMP);
+    CG->SetLastName(TEMP);
 
     std::cout << "\n\tEnter your birth country: ";
-    getline(std::cin, country_of_birth);
+    getline(std::cin, TEMP);
+    CG->SetCountryBirth(TEMP);
 
     std::cout << "\n\tEnter your personal id: ";
-    getline(std::cin, personal_id);
+    getline(std::cin, TEMP);
+    CG->SetPersonalId(TEMP);
     SavePerson();
+    LoadPerson();
+}
+//-------------------------------------------------------------------------------------------------------------------//
+
+// Login section, checking that the account number is correct and first name
+
+void LoginPerson()
+{
+    while (true)
+    {
+        std::string TEMP;
+        std::cout << "\n\tPlease enter your first name: ";
+        std::cin.ignore();
+        getline(std::cin, TEMP);
+        std::cout << "\n\tPlease enter your password( account number): ";
+        getline(std::cin, TEMP);
+        if (TEMP == CG->GetAccountNumber() || TEMP == CG->GetFirstName())
+        {
+            std::cout << "\n\tSuccess! you have successfully logged into your account";
+            break;
+        }
+        else
+        {
+            std::cout << "\n\tTry again your password or name doesn't match";
+        }
+    }
 }
