@@ -4,16 +4,18 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <ctime>
+#include <string>
 // CLASS
+Person *CG;
 Person::Person()
 {
     std::cout << "\n\tBuilding a PERSON.";
 }
 Person::~Person()
 {
+    delete CG;
     std::cout << "\n\tDestroying a Person.";
 }
-Person *CG;
 // Globals
 
 // Creating random account number
@@ -31,15 +33,26 @@ std::string gen_random(const int len)
     }
     return tmp_s;
 }
+
 //-------------------------------------------------------------------------------------------------------------------//
+
+// Building person
 void CreatePerson()
 {
     CG = new Person();
 }
+
+// Destroy person
+void DestroyPerson()
+{
+    std::cout << "\n\tDestroying a Person.";
+    delete CG;
+    Sleep(2000);
+}
+
 //-------------------------------------------------------------------------------------------------------------------//
 
 // Saving values to a text file
-
 void SavePerson()
 {
     try
@@ -60,10 +73,10 @@ void SavePerson()
         std::cout << exc << std::endl;
     }
 }
+
 //-------------------------------------------------------------------------------------------------------------------//
 
 // File loading
-
 void LoadPerson()
 {
     try
@@ -96,17 +109,18 @@ void LoadPerson()
         std::cout << "File empty" << std::endl;
     }
 }
+
 //-------------------------------------------------------------------------------------------------------------------//
 
 // Displaying the account number after creating a new user
-
 void DisplayAccount()
 {
     system("cls");
-    std::cout << "\n\tThis is your account number, remember it you will need it to log in: " <<CG->GetAccountNumber() << "\n";
+    std::cout << "\n\tThis is your account number, remember it you will need it to log in: " << CG->GetAccountNumber() << "\n";
     Sleep(3000);
     system("cls");
 }
+
 //-------------------------------------------------------------------------------------------------------------------//
 
 // Creating a new user account
@@ -133,10 +147,10 @@ void NewAccount()
     SavePerson();
     LoadPerson();
 }
+
 //-------------------------------------------------------------------------------------------------------------------//
 
 // Login section, checking that the account number is correct and first name
-
 void LoginPerson()
 {
     while (true)
@@ -150,11 +164,25 @@ void LoginPerson()
         if (TEMP == CG->GetAccountNumber() || TEMP == CG->GetFirstName())
         {
             std::cout << "\n\tSuccess! you have successfully logged into your account";
+            Sleep(4000);
+            AccountPanel();
             break;
         }
         else
         {
             std::cout << "\n\tTry again your password or name doesn't match";
+            Sleep(2000);
+            system("cls");
         }
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------//
+
+// User interface
+void AccountPanel()
+{
+    system("cls");
+    std::cout << "\n\n\t\t\tWelcome " << CG->GetFirstName() << "" << std::endl;
+    system("pause");
 }
