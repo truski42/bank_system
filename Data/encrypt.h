@@ -9,7 +9,7 @@ class encdec
     int key;
 
     // File name to be encrypt
-    std::string file = "user_accounts.txt";
+    char file[20] = "user_accounts.txt";
     char c;
 
 public:

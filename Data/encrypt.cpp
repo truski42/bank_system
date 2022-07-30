@@ -29,7 +29,6 @@ void encdec::encrypt()
         // output file
         fout << (char)temp;
     }
-
     // Closing both files
     fin.close();
     fout.close();

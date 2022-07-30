@@ -7,6 +7,7 @@
 #include "Data\personal_id.h"
 #include "Data\account.h"
 #include "Data\encrypt.h"
+#include "Data\deletefile.h"
 #include <vector>
 #include <string>
 
@@ -22,6 +23,7 @@ using std::vector;
 int main()
 {
 	encdec E;
+	deletefile D;
 	srand(time(0));
 	int choice;
 	system("cls");
@@ -42,6 +44,7 @@ int main()
 		case 1:
 			NewAccount();
 			E.encrypt();
+			//D.DestoryFile();
 			break;
 		case 2:
 			LoginPerson();
@@ -50,7 +53,7 @@ int main()
 			NewAccount();
 			break;
 		case 4:
-			DestroyPerson();
+			//DestroyPerson();
 			exit(0);
 		default:
 			break;
