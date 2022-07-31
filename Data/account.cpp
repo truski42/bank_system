@@ -65,6 +65,7 @@ void SavePerson()
         datafile << CG->GetCountrytBirth() << "\n";
         datafile << CG->GetPersonalId() << "\n";
         datafile << gen_random(9) << "\n";
+        datafile << CG->GetUserBalance() << "\n";
         datafile.close();
         std::cout << "\n\tSuccess! Data was saved to file";
     }
@@ -82,6 +83,7 @@ void LoadPerson()
     try
     {
         std::string TEMP;
+        int Balance;
         std::ifstream datafile;
         datafile.open("user_accounts.txt", std::ios::in);
         getline(datafile, TEMP);
@@ -98,6 +100,9 @@ void LoadPerson()
 
         getline(datafile, TEMP);
         CG->SetAccountNumber(TEMP);
+
+        datafile >> Balance;
+        CG->SetUserBalance(Balance);
 
         datafile.close();
         DisplayAccount();
@@ -127,6 +132,7 @@ void DisplayAccount()
 void NewAccount()
 {
     std::string TEMP;
+    int Balance;
     system("cls");
     std::cout << "\n\tEnter your first name: ";
     std::cin.ignore();
@@ -144,6 +150,15 @@ void NewAccount()
     std::cout << "\n\tEnter your personal id: ";
     getline(std::cin, TEMP);
     CG->SetPersonalId(TEMP);
+
+    std::cout << "\n\tEnter your first deposit: ";
+    std::cin >> Balance;
+    if(Balance == 0){
+        CG->SetUserBalance(Balance);
+    }else{
+        CG->SetUserBalance(Balance);
+    }
+
     SavePerson();
     LoadPerson();
 }
@@ -153,8 +168,9 @@ void NewAccount()
 // Login section, checking that the account number is correct and first name
 void LoginPerson()
 {
-    while (true)
+    for(int i = 3; i >= 0; --i)
     {
+        system("cls");
         std::string TEMP;
         std::cout << "\n\tPlease enter your first name: ";
         std::cin.ignore();
@@ -168,9 +184,15 @@ void LoginPerson()
             AccountPanel();
             break;
         }
+        else if(i == 0){
+            std::cout << "Too many invalid attempts" << std::endl;
+            std::cout << "Your account has been blocked" << std::endl;
+            exit(0);
+        }
         else
         {
-            std::cout << "\n\tTry again your password or name doesn't match";
+            std::cout << "\n\tTry again your password or name doesn't match" << std::endl;
+            std::cout << "\n\tLeft attempts: " <<  i << std::endl;
             Sleep(2000);
             system("cls");
         }
@@ -182,7 +204,42 @@ void LoginPerson()
 // User interface
 void AccountPanel()
 {
-    system("cls");
-    std::cout << "\n\n\t\t\tWelcome " << CG->GetFirstName() << "" << std::endl;
+    int choice;
+    while (true)
+    {
+        system("cls");
+        std::cout << "\n\n\t\tWelcome " << CG->GetFirstName() << "" << std::endl;
+        std::cout << "\t1. Check your account balance" << std::endl;
+        std::cout << "\t2. Withdraw" << std::endl;
+        std::cout << "\t3. Deposit" << std::endl;
+        std::cout << "\t4. Exit" << std::endl;
+        std::cout << "\tEnter your choice: ";
+        std::cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            CheckBalance();
+            break;
+        case 2:
+
+            break;
+        case 3:
+            break;
+        case 4:
+            exit(0);
+        default:
+            break;
+        }
+    }
+    system("pause");
+}
+
+//-------------------------------------------------------------------------------------------------------------------//
+
+// Checking user balance
+
+void CheckBalance(){
+    std::cout << "\n\tBalance: " << CG->GetUserBalance() << std::endl;
+    Sleep(2000);
     system("pause");
 }
