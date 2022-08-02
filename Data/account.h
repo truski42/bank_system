@@ -30,6 +30,7 @@ protected:
     bool one_load;
 };
 // Function Prototypes
+void SaveTheSavings();
 void LoginPerson();
 void CreatePerson();
 void NewAccount();
