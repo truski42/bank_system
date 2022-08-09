@@ -67,23 +67,10 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "BankSystem",
-            "database": "gry",
-            "username": "admin",
-            "password": "M778899"
-        },
-        {
-            "mysqlOptions": {
-                "authProtocol": "default"
-            },
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 3306,
-            "driver": "MariaDB",
-            "username": "root",
-            "name": "Bank",
-            "database": "gry",
-            "password": "admin"
+            "username": "sqluser",
+            "password": "password",
+            "name": "Bank system",
+            "database": "banksystem"
         }
     ],
     "C_Cpp.errorSquiggles": "Disabled"

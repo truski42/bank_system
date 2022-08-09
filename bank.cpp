@@ -8,20 +8,14 @@
 #include "Data\account.h"
 #include "Data\encrypt.h"
 #include "Data\deletefile.h"
-#include <vector>
-#include <string>
+#include "Database/database.h"
+#include <string.h>
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::fstream;
-using std::ifstream;
-using std::ofstream;
-using std::string;
-using std::vector;
+using namespace std;
 
 int main()
 {
+	db M;
 	encdec E;
 	deletefile D;
 	srand(time(0));
@@ -30,6 +24,7 @@ int main()
 	system("Color 0A");
 	CreatePerson();
 	std::cout << "\n\n\t\t\tCUSTOMER ACCOUNT BANKING MANAGEMENT SYSTEM" << std::endl;
+	M.Database();
 	while (true)
 	{
 		LoadPerson();

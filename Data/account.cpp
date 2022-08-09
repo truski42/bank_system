@@ -7,6 +7,7 @@
 #include <string>
 // CLASS
 Person *CG;
+
 Person::Person()
 {
     std::cout << "\n\tBuilding a PERSON.";
@@ -16,6 +17,7 @@ Person::~Person()
     delete CG;
     std::cout << "\n\tDestroying a Person.";
 }
+
 // Globals
 
 // Creating random account number

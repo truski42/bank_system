@@ -1,5 +1,5 @@
 #ifndef ENCRYPT_H
-#define ECRYPT_H
+#define ENCRYPT_H
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -14,6 +14,6 @@ class encdec
 
 public:
     void encrypt();
-    void decrypt();
+    //void decrypt();
 };
 #endif // ENCRYPT_H
