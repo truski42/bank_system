@@ -24,7 +24,6 @@ Person::~Person()
 
 std::string gen_random(const int len)
 {
-    // ofstream user_account("user_accounts.txt", ofstream::app);
     static const char alphanum[] = "0123456789";
     std::string tmp_s;
     tmp_s.reserve(len);

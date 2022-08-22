@@ -8,14 +8,14 @@
 #include "Data\account.h"
 #include "Data\encrypt.h"
 #include "Data\deletefile.h"
-#include "Database/database.h"
+//#include "Database/database.h"
 #include <string.h>
 
 using namespace std;
 
 int main()
 {
-	db M;
+	//db M;
 	encdec E;
 	deletefile D;
 	srand(time(0));
@@ -24,7 +24,7 @@ int main()
 	system("Color 0A");
 	CreatePerson();
 	std::cout << "\n\n\t\t\tCUSTOMER ACCOUNT BANKING MANAGEMENT SYSTEM" << std::endl;
-	M.Database();
+	//M.Database();
 	while (true)
 	{
 		LoadPerson();
